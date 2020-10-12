@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if (nums.size()==0){//判断有没有房屋，如果没有则return 0
+            return 0;
+        }
+        if(nums.size()==1){//若果只有一栋房屋，所能偷取的最大值就是该栋房屋的价值
+            return nums[0];
+        }
+        vector<int> dp (nums.size(),0);   //开一个数组dp，用存储由n个房屋时，所能偷到的最大值
+        dp[0]=nums[0];                    // 只有一个房屋时，所能偷取的最大值为为该房屋的价值
+        dp[1]=max(nums[0],nums[1]);       //如果有两个房屋时，所能偷取最大值为第一个房屋和第二个房屋的最大值
+        for (int i = 2; i < nums.size(); i++) {
+            dp[i] = max(dp[i-2]+nums[i],dp[i-1]);   
+        }
+        return dp[nums.size()-1];
+    }
+};
