@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if (nums.size()==1){  //如果数组长度为1.最大子数组长度为该数；
+            return nums[0];
+        }
+        if(nums.size()==0){ //如果数组为空。则返回0；
+            return 0;
+        }
+        vector<int> dp(nums.size());
+        dp[0]=nums[0];//   初始数组长度为1.最大子数组长度为该数
+        int max_val =nums[0];// 记录最大值
+        for (int i = 1; i < nums.size(); i++) {
+            dp[i] = max(dp[i-1]+nums[i],nums[i]); 
+            max_val = max(dp[i],max_val);
+        }
+        return max_val;
+    }
+};
